@@ -1,0 +1,148 @@
+{
+  "lastUpdated": "2026-01-28T18:45:00-08:00",
+  "waitingOnCalvin": [
+    {
+      "id": "github-access",
+      "title": "GitHub Access",
+      "description": "Need repo access for version control & better dev workflow",
+      "priority": "high",
+      "category": "tools"
+    },
+    {
+      "id": "medicare-deepdive",
+      "title": "Continue Medicare Deep-Dive",
+      "description": "Business model, types of agents, core values",
+      "priority": "high",
+      "category": "discussion"
+    },
+    {
+      "id": "email-access",
+      "title": "Email Access",
+      "description": "To monitor inbox and draft responses for you",
+      "priority": "medium",
+      "category": "tools"
+    },
+    {
+      "id": "calendar-access",
+      "title": "Calendar Access",
+      "description": "For scheduling and reminders",
+      "priority": "medium",
+      "category": "tools"
+    }
+  ],
+  "activeProjects": [
+    {
+      "id": "medicare-broker-directory",
+      "title": "Medicare Broker Directory",
+      "url": "https://medicarebrokerdirectory.com",
+      "description": "Local-first agent directory",
+      "status": "live",
+      "needs": ["Marketing to agents", "Funnel fix (thousands → 7 conversions)"],
+      "builtWith": "Lovable.dev"
+    },
+    {
+      "id": "brain-scriber",
+      "title": "Brain Scriber AI",
+      "url": "https://brainscriber.ai",
+      "description": "Book publishing platform",
+      "status": "working",
+      "needs": ["Deep-dive discussion", "Maybe move to GitHub"],
+      "builtWith": "Lovable.dev"
+    },
+    {
+      "id": "gentle-pace-fitness",
+      "title": "Gentle Pace Fitness",
+      "url": "https://gentlepacefitness.com",
+      "description": "Voice-guided interval training app",
+      "status": "working",
+      "needs": ["App Store deployment"],
+      "builtWith": "Lovable.dev"
+    },
+    {
+      "id": "medicare-book",
+      "title": "Medicare Book",
+      "description": "Credibility piece for Amazon",
+      "status": "goal",
+      "needs": ["Write using Brain Scriber"],
+      "competitor": "10 Costly Medicare Mistakes by Danielle Roberts"
+    },
+    {
+      "id": "social-expansion",
+      "title": "Social Media Expansion",
+      "description": "LinkedIn → YouTube, podcast, etc.",
+      "status": "goal",
+      "needs": ["Content strategy", "Repurposing system", "Consistency help"]
+    }
+  ],
+  "needsDiscussion": [
+    {
+      "id": "medicare-business-model",
+      "title": "Medicare Business Model",
+      "description": "Calvin started explaining, needs to continue",
+      "priority": "high"
+    },
+    {
+      "id": "agent-types",
+      "title": "Types of Agents (Nuvo Health)",
+      "description": "Part of Medicare deep-dive",
+      "priority": "high"
+    },
+    {
+      "id": "brain-scriber-deepdive",
+      "title": "Brain Scriber AI Deep-Dive",
+      "description": "How it works, content corpus, next steps",
+      "priority": "medium"
+    },
+    {
+      "id": "core-values",
+      "title": "Core Values (Nuvo Health)",
+      "description": "Calvin mentioned wanting to share these",
+      "priority": "medium"
+    }
+  ],
+  "alexWorkingOn": [
+    {
+      "title": "Command Center v1",
+      "description": "Building the interface",
+      "status": "now"
+    },
+    {
+      "title": "Proactive Opportunity Hunting",
+      "description": "Looking for ways to help Calvin",
+      "status": "ongoing"
+    }
+  ],
+  "tools": {
+    "has": [
+      "File read/write",
+      "Web search (Brave)",
+      "Web fetch",
+      "Shell commands",
+      "WhatsApp",
+      "Browser control",
+      "Cron jobs"
+    ],
+    "needs": [
+      "GitHub",
+      "Email",
+      "Calendar",
+      "Social posting",
+      "LinkedIn API"
+    ]
+  },
+  "ideas": [
+    "LinkedIn → multi-platform repurposing automation",
+    "Medicare News Monitor (CMS/policy alerts)",
+    "Reusable advocacy tool templates (like Final Rule)",
+    "Medicare Broker Directory funnel analysis",
+    "Low-effort podcast format research"
+  ],
+  "completedToday": [
+    "Bootstrap complete — Alex Carter is live",
+    "Changed message prefix to [Alex]",
+    "Set up web search (Brave API)",
+    "Created memory system",
+    "Researched Calvin's background",
+    "AI model optimization research"
+  ]
+}

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex & Calvin — Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f0f1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #8892b0;
+            --text-muted: #5a6178;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Login Screen */
+        #login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+        
+        .login-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+        
+        .login-logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .login-box h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 0.25em;
+            margin-bottom: 1rem;
+        }
+        
+        .login-input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+        }
+        
+        .login-input::placeholder {
+            letter-spacing: normal;
+            color: var(--text-muted);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        .login-error {
+            color: var(--accent-red);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        /* Dashboard - Hidden until login */
+        #dashboard { display: none; }
+        
+        .layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .main {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .header p {
+            color: var(--text-secondary);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-list {
+            list-style: none;
+        }
+        
+        .status-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        
+        .status-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .status-dot.green { background: var(--accent-green); }
+        .status-dot.yellow { background: #f59e0b; }
+        .status-dot.red { background: var(--accent-red); }
+        .status-dot.blue { background: #3b82f6; }
+        
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .logout-btn {
+            margin-top: auto;
+            padding: 0.75rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <div class="login-box">
+            <div class="login-logo">🤖</div>
+            <h1>Command Center</h1>
+            <p>Alex & Calvin's Dashboard</p>
+            <input type="password" id="password" class="login-input" placeholder="Enter password" autofocus>
+            <button class="login-btn" onclick="checkPassword()">Enter</button>
+            <div class="login-error" id="error">Incorrect password</div>
+        </div>
+    </div>
+    
+    <!-- Dashboard (hidden until login) -->
+    <div id="dashboard">
+        <div class="layout">
+            <aside class="sidebar">
+                <div class="logo">
+                    <div class="logo-icon">🤖</div>
+                    <div class="logo-text">
+                        <h2>Alex & Calvin</h2>
+                        <span>Command Center</span>
+                    </div>
+                </div>
+                
+                <div class="nav">
+                    <div class="card" style="background: transparent; border: none; padding: 0;">
+                        <h3>⚡ Quick Stats</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot green"></span> Systems Online</li>
+                            <li><span class="status-dot green"></span> GitHub Connected</li>
+                            <li><span class="status-dot green"></span> Gmail Connected</li>
+                            <li><span class="status-dot green"></span> WhatsApp Active</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+            </aside>
+            
+            <main class="main">
+                <div class="header">
+                    <h1>Welcome back, Calvin</h1>
+                    <p id="current-date"></p>
+                </div>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>📝 YouTube Scripts</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot green"></span> Plan G Companies RANKED 2026 — Ready</li>
+                            <li><span class="status-dot green"></span> Why I Stopped Working on Commission — Ready</li>
+                            <li><span class="status-dot green"></span> What Happens After You Enroll — Ready</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏗️ Projects</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot blue"></span> Medicare Broker Directory — Strategy Complete</li>
+                            <li><span class="status-dot blue"></span> Medicare Book — Research Complete</li>
+                            <li><span class="status-dot yellow"></span> PlanFit YouTube — In Progress</li>
+                            <li><span class="status-dot yellow"></span> BrainScriber — Needs Discussion</li>
+                            <li><span class="status-dot yellow"></span> Gentle Fitness — Needs Discussion</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🔌 Integrations</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot green"></span> GitHub — calvinandalex</li>
+                            <li><span class="status-dot green"></span> Gmail — alexforcalvin@gmail.com</li>
+                            <li><span class="status-dot green"></span> WhatsApp — Connected</li>
+                            <li><span class="status-dot yellow"></span> Google Calendar — Not yet</li>
+                            <li><span class="status-dot yellow"></span> Google Drive — Not yet</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📋 Waiting on Calvin</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot yellow"></span> Review YouTube scripts</li>
+                            <li><span class="status-dot yellow"></span> Answer questions in QUESTIONS-FOR-CALVIN.md</li>
+                            <li><span class="status-dot yellow"></span> Share internal playbooks/process docs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🧠 Knowledge Base</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot green"></span> Nuvo Health — 17 facts captured</li>
+                            <li><span class="status-dot green"></span> Calvin Bagley — 13 facts captured</li>
+                            <li><span class="status-dot green"></span> SET Team — Documented</li>
+                            <li><span class="status-dot green"></span> Brand Structure — Mapped</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📅 Today's Activity</h3>
+                        <ul class="status-list">
+                            <li><span class="status-dot green"></span> Morning brief sent (6:52 AM)</li>
+                            <li><span class="status-dot green"></span> Business context captured</li>
+                            <li><span class="status-dot green"></span> GitHub connected</li>
+                            <li><span class="status-dot green"></span> Gmail connected + first email sent</li>
+                            <li><span class="status-dot green"></span> Dashboard deployed</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p class="last-updated" id="last-updated"></p>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        // Simple hash function for password
+        const correctHash = '224110'; // In production, use a real hash
+        
+        // Check if already logged in
+        if (localStorage.getItem('dashboard_auth') === 'true') {
+            showDashboard();
+        }
+        
+        // Handle Enter key
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+        
+        function checkPassword() {
+            const input = document.getElementById('password').value;
+            if (input === correctHash) {
+                localStorage.setItem('dashboard_auth', 'true');
+                showDashboard();
+            } else {
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        }
+        
+        function showDashboard() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Set current date
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('last-updated').textContent = 'Last updated: ' + now.toLocaleString();
+        }
+        
+        function logout() {
+            localStorage.removeItem('dashboard_auth');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
